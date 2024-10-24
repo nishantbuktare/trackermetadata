@@ -1,0 +1,225 @@
+<template>
+    <div class="outer-container">
+        <span class="yearlyGoals">Yearly Goals</span>
+        <div class="card-container">
+                <template if:true={allGoalsFromApex} for:each={allGoalsFromApex} for:item="goal" for:index="index">
+                    <template key={goal.Id} if:true={goal.cardFlip}>
+                        <div key={goal.Id} data-id={goal.Id} data-card={goal.Name} data-api={goal.GoalsApiName__c} data-goalapi={goal.Goal_Api__c} class="card" onclick={handleCardClick} >
+                            <img src={goal.ImageUrl__c}>
+                            <div class="text-container">
+                                <h4><b>{goal.Name}</b></h4>
+                            </div>
+                        </div>
+                    </template>
+                    <template key={goal.Id} if:false={goal.cardFlip}>
+                        <div key={goal.Id} class="card cardBack">
+                            <div class="text-container">
+                                <template if:true={subGoals} for:each={subGoals} for:item="goal" for:index="index">
+                                    <p if:false={goal.editMode}  key={goal.Id} data-id={goal.Id} onclick={handleGoalEditClick}>{goal.Name}</p>
+                                    <c-small-edit-component ontick={handleOnTickFromInput} key={goal.Id} if:true={goal.editMode} record-id={recordId} record-name={recordName}></c-small-edit-component>
+                                </template>
+                            </div>
+                            <span class="backButton" onclick={handleCardBackClick}><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" x="0" y="0" viewBox="0 0 512 512" xml:space="preserve"><g >
+                                <path d="M420.361 192.229a31.967 31.967 0 0 0-5.535-.41H99.305l6.88-3.2a63.998 63.998 0 0 0 18.08-12.8l88.48-88.48c11.653-11.124 13.611-29.019 4.64-42.4-10.441-14.259-30.464-17.355-44.724-6.914a32.018 32.018 0 0 0-3.276 2.754l-160 160c-12.504 12.49-12.515 32.751-.025 45.255l.025.025 160 160c12.514 12.479 32.775 12.451 45.255-.063a32.084 32.084 0 0 0 2.745-3.137c8.971-13.381 7.013-31.276-4.64-42.4l-88.32-88.64a64.002 64.002 0 0 0-16-11.68l-9.6-4.32h314.24c16.347.607 30.689-10.812 33.76-26.88 2.829-17.445-9.019-33.88-26.464-36.71z" fill="#ffffff" data-original="#ffffff" class=""></path>
+                            </g></svg></span>
+                        </div>
+                    </template>
+                </template>
+        </div>
+    </div>
+
+    <div class="aspect-content1">
+        <div class="aspect-tab ">
+          <input id="item-18" type="checkbox" class="aspect-input" name="aspect">
+          <label for="item-18" class="aspect-label"></label>
+          <div class="aspect-content">
+              <div class="aspect-info">
+                  <div class="chart-pie negative over50">
+                      <span class="chart-pie-count">-69</span>
+                      <div>
+                          <div class="first-fill"></div>
+                          <div class="second-fill" style="transform: rotate(249deg)"></div>
+                      </div>
+                  </div>
+                  <span class="aspect-name">Career Goal</span>
+              </div>
+              <div class="aspect-stat">
+                  <div class="all-opinions">
+                      <span class="all-opinions-count">18</span>
+                      <span>opinion</span>
+                  </div>
+                  <div>
+                      <span class="positive-count">4</span>
+                      <span class="neutral-count">1</span>
+                      <span class="negative-count">13</span>
+                  </div>
+              </div>
+          </div>
+          <div class="aspect-tab-content">
+              <div class="sentiment-wrapper">
+                  <div>
+                      <div>
+                          <div class="positive-count opinion-header">
+                              <span>positive</span>
+                              <span>4</span>
+                          </div>
+                          <div>
+                              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div>
+                      <div>
+                          <div class="neutral-count opinion-header">
+                              <span>neutral</span>
+                              <span>1</span>
+                          </div>
+                          <div>
+                              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div>
+                      <div>
+                          <div class="negative-count opinion-header">
+                              <span>negative</span>
+                              <span>13</span>
+                          </div>
+                          <div>
+                              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="aspect-tab ">
+          <input id="item-14" type="checkbox" class="aspect-input" name="aspect">
+          <label for="item-14" class="aspect-label"></label>
+          <div class="aspect-content">
+              <div class="aspect-info">
+                  <div class="chart-pie positive over50">
+                      <span class="chart-pie-count">58</span>
+                      <div>
+                          <div class="first-fill"></div>
+                          <div class="second-fill" style="transform: rotate(209deg)"></div>
+                      </div>
+                  </div>
+                  <span class="aspect-name">Health Goal</span>
+              </div>
+              <div class="aspect-stat">
+                  <div class="all-opinions">
+                      <span class="all-opinions-count">22</span>
+                      <span>opinion</span>
+                  </div>
+                  <div>
+                      <span class="positive-count">12</span>
+                      <span class="neutral-count">5</span>
+                      <span class="negative-count">5</span>
+                  </div>
+              </div>
+          </div>
+          <div class="aspect-tab-content">
+              <div class="sentiment-wrapper">
+                  <div>
+                      <div>
+                          <div class="positive-count opinion-header">
+                              <span>positive</span>
+                              <span>12</span>
+                          </div>
+                          <div>
+                              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div>
+                      <div>
+                          <div class="neutral-count opinion-header">
+                              <span>neutral</span>
+                              <span>5</span>
+                          </div>
+                          <div>
+                              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div>
+                      <div>
+                          <div class="negative-count opinion-header">
+                              <span>negative</span>
+                              <span>5</span>
+                          </div>
+                          <div>
+                              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="aspect-tab ">
+          <input id="item-2" type="checkbox" class="aspect-input" name="aspect">
+          <label for="item-2" class="aspect-label"></label>
+          <div class="aspect-content">
+              <div class="aspect-info">
+                  <div class="chart-pie positive">
+                      <span class="chart-pie-count">33</span>
+                      <div>
+                          <div class="first-fill"></div>
+                          <div class="second-fill" style="transform: rotate(119deg)"></div>
+                      </div>
+                  </div>
+                  <span class="aspect-name">Personal Goal</span>
+              </div>
+              <div class="aspect-stat">
+                  <div class="all-opinions">
+                      <span class="all-opinions-count">7</span>
+                      <span>opinion</span>
+                  </div>
+                  <div>
+                      <span class="positive-count">3</span>
+                      <span class="neutral-count">2</span>
+                      <span class="negative-count">2</span>
+                  </div>
+              </div>
+          </div>
+          <div class="aspect-tab-content">
+              <div class="sentiment-wrapper">
+                  <div>
+                      <div>
+                          <div class="positive-count opinion-header">
+                              <span>positive</span>
+                              <span>3</span>
+                          </div>
+                          <div>
+                              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div>
+                      <div>
+                          <div class="neutral-count opinion-header">
+                              <span>neutral</span>
+                              <span>2</span>
+                          </div>
+                          <div>
+                              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div>
+                      <div>
+                          <div class="negative-count opinion-header">
+                              <span>negative</span>
+                              <span>2</span>
+                          </div>
+                          <div>
+                              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id congue dolor. Vivamus eleifend vitae nunc sed tincidunt.</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+</template>
